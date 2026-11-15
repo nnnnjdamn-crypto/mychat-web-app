@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101522">
+  <title>MyChat — Messages</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="shell">
+    <section id="authView" class="auth-view">
+      <div class="brand-mark">M</div>
+      <h1>Welcome to <span>MyChat</span></h1>
+      <p class="muted">Your private conversations, in one place.</p>
+      <form id="authForm" class="auth-card">
+        <div class="tabs">
+          <button type="button" id="loginTab" class="tab active">Log in</button>
+          <button type="button" id="signupTab" class="tab">Create account</button>
+        </div>
+        <label id="nameWrap" class="hidden">Display name<input id="displayName" autocomplete="name" maxlength="40" placeholder="Your name"></label>
+        <label>Email address<input id="email" type="email" autocomplete="email" required placeholder="you@example.com"></label>
+        <label>Password<input id="password" type="password" autocomplete="current-password" minlength="6" required placeholder="At least 6 characters"></label>
+        <button id="authSubmit" class="primary" type="submit">Log in</button>
+        <button id="googleBtn" class="google" type="button"><span>G</span> Continue with Google</button>
+        <p id="authMessage" class="message" aria-live="polite"></p>
+      </form>
+      <p class="tiny muted">By continuing, you agree to use MyChat responsibly.</p>
+    </section>
+
+    <section id="appView" class="app-view hidden">
+      <aside class="sidebar">
+        <header class="side-header">
+          <div class="brand-inline"><div class="brand-mark small">M</div><strong>MyChat</strong></div>
+          <button id="signOutBtn" class="icon-btn" title="Sign out" aria-label="Sign out">↪</button>
+        </header>
+        <div class="profile-line">
+          <div id="myAvatar" class="avatar">M</div>
+          <div class="profile-copy"><strong id="myName">My account</strong><span id="myEmail" class="muted"></span></div>
+        </div>
+        <div class="section-heading"><span>CHATS</span><button id="newChatBtn" class="new-chat">＋ New</button></div>
+        <div id="chatList" class="chat-list"><div class="empty-hint">Your conversations will appear here.</div></div>
+      </aside>
+
+      <section class="conversation">
+        <div id="welcomePane" class="welcome-pane">
+          <div class="welcome-icon">✦</div>
+          <h2>Your conversations start here</h2>
+          <p class="muted">Choose a chat or start a new one with someone's account email.</p>
+          <button id="welcomeNewChat" class="primary compact">＋ Start a chat</button>
+        </div>
+        <div id="chatPane" class="chat-pane hidden">
+          <header class="chat-header">
+            <div id="peerAvatar" class="avatar">?</div>
+            <div class="peer-copy"><strong id="peerName">Conversation</strong><span id="peerStatus" class="muted">MyChat</span></div>
+          </header>
+          <div id="messages" class="messages"><div class="empty-hint">Loading messages…</div></div>
+          <form id="messageForm" class="composer">
+            <input id="messageInput" maxlength="4000" autocomplete="off" placeholder="Write a message…" required>
+            <button class="send-btn" type="submit" aria-label="Send message">➤</button>
+          </form>
+          <p class="composer-note">Messages are stored in your Firebase Firestore database.</p>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <dialog id="newChatDialog" class="dialog">
+    <form id="newChatForm" method="dialog">
+      <div class="dialog-title"><h3>Start a conversation</h3><button type="button" id="closeDialog" class="icon-btn">×</button></div>
+      <p class="muted">Enter the exact email address used by the other person in MyChat.</p>
+      <label>Account email<input id="peerEmail" type="email" required placeholder="friend@example.com"></label>
+      <button class="primary" type="submit">Find account</button>
+      <p id="newChatMessage" class="message" aria-live="polite"></p>
+    </form>
+  </dialog>
+
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script type="module" src="./app.js"></script>
+</body>
+</html>
